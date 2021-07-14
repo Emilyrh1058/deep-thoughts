@@ -17,8 +17,17 @@ const Signup = () => {
   };
 
   // submit form
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = async event => {
     event.preventDefault();
+  
+    try {
+      const { data } = await addUser({
+        variables: { ...formState }
+      });
+      console.log(data);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -59,6 +68,7 @@ const Signup = () => {
                 Submit
               </button>
             </form>
+            {error && <div>Sign up failed</div>}
           </div>
         </div>
       </div>
